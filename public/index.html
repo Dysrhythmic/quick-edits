@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Image Effects</title>
+</head>
+
+<body>
+    <div class="content white z-depth-3">
+        <h2>Image Effects</h2>
+        <div class="divider"></div>
+        <p>Need to do some basic image manipulation? Just select an option and upload your image below. We'll take care of the rest.</p>
+
+        <div class="options-container">
+            <div class="options">
+                <label for="grayscale">
+                    <input id="grayscale" name="option" type="radio" checked="true">
+                    <span>Grayscale</span>
+                </label>
+                <label for="resize">
+                    <input id="resize" name="option" type="radio">
+                    <span>Resize (Maintain Aspect Ratio)</span>
+                </label>
+                <label for="exact-resize">
+                    <input id="exact-resize" name="option" type="radio">
+                    <span>Exact Resize</span>
+                </label>
+                <label for="contrast">
+                    <input id="contrast" name="option" type="radio">
+                    <span>Adjust Contrast</span>
+                </label>
+                <label for="brightness">
+                    <input id="brightness" name="option" type="radio">
+                    <span>Adjust Brightness</span>
+                </label>
+                <label for="rotate">
+                    <input id="rotate" name="option" type="radio">
+                    <span>Rotate</span>
+                </label>
+
+                <div id="height-field" class="input-field hide">
+                    <input id="height" type="number">
+                    <label for="height">height</label>
+                </div>
+                <div id="width-field" class="input-field hide">
+                    <input id="width" type="number">
+                    <label for="width">width</label>
+                </div>
+                <div id="amount-field" class="input-field hide">
+                    <input id="amount" type="number">
+                    <label for="amount">E.g. -50 or 50</label>
+                </div>
+                
+                <div id="rotate-selection" class="hide">
+                    <label for="ninety">
+                        <input id="ninety" name="degrees" type="radio">
+                        <span>90 Degrees</span>
+                    </label>
+
+                    <label for="one-eighty">
+                        <input id="one-eighty" name="degrees" type="radio">
+                        <span>180 Degrees</span>
+                    </label>
+
+                    <label for="two-seventy">
+                        <input id="two-seventy" name="degrees" type="radio">
+                        <span>270 Degrees</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <label for="upload">
+            <input id="upload" class="hide" type="file" accept=".png">
+            <a class="btn-large waves-effect waves-light red tooltipped"><i class="material-icons left">insert_photo</i>Upload PNG Image</a>
+        </label>
+
+        <img id="img">
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
