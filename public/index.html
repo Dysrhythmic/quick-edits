@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Image Effects</title>
+    <title>Quick Edits</title>
 </head>
 
 <body>
     <div class="content white z-depth-3">
-        <h2>Image Effects</h2>
+        <h2>Quick Edits</h2>
         <div class="divider"></div>
-        <p>Need to do some basic image manipulation? Just select an option and upload your image below. We'll take care of the rest.</p>
+        <p>Need to do some basic image manipulation? Just upload your image and select an option. Reload the page to start with a new image.</p>
 
         <div class="options-container">
-            <div class="options">
+            <div class="options hide">
                 <label for="grayscale">
                     <input id="grayscale" name="option" type="radio" checked="true">
                     <span>Grayscale</span>
@@ -75,10 +75,14 @@
             </div>
         </div>
 
+        <label id="upload-btn" for="upload">
+            <input id="upload" class="hide" type="file" accept="image/png, image/jpeg">
+            <a class="btn-large waves-effect waves-light red tooltipped"><i class="material-icons left">insert_photo</i>Upload Image</a>
+        </label>
 
-        <label for="upload">
-            <input id="upload" class="hide" type="file" accept=".png">
-            <a class="btn-large waves-effect waves-light red tooltipped"><i class="material-icons left">insert_photo</i>Upload PNG Image</a>
+        <label id="submit-btn" for="submit" class="hide">
+            <input id="submit" class="hide" type="submit">
+            <a class="btn-large waves-effect waves-light red tooltipped"><i class="material-icons left">edit</i>Apply Edit</a>
         </label>
 
         <img id="img">

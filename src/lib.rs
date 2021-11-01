@@ -23,12 +23,12 @@ impl Degrees {
 }
 
 fn decode_image(encoded_img: &str) -> Vec<u8> {
-    // base64 to vector
+    // base64 to bytes
     decode(encoded_img).unwrap()
 }
 
 fn load_image(decoded_img: Vec<u8>) -> image::DynamicImage {
-    // vector to dynamic image
+    // bytes to dynamic image
     load_from_memory(&decoded_img).unwrap()
 }
 
@@ -49,7 +49,7 @@ fn encode_image(buffer: Vec<u8>) -> String {
 fn unpack_image(encoded_img: &str) -> image::DynamicImage {
     // prepare received image for editing
     let decoded_img = decode_image(encoded_img);
-    log(&"Image decoded from string to octets".into());
+    log(&"Image decoded from string to bytes".into());
 
     let img = load_image(decoded_img);
     log(&"Dynamic image loaded".into());

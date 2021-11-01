@@ -46,5 +46,5 @@ body {
 
 .content > img {
     display: block;
-    margin: auto;
+    margin: 1.5rem auto;
 }
