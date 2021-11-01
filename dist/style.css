@@ -48,3 +48,13 @@ body {
     display: block;
     margin: 1.5rem auto;
 }
+
+@media(max-width: 800px) {
+    .content .options-container {
+        width: 100%;
+    }
+
+    .content .options-container .options label {
+        margin: 1.5rem;
+    }
+}
