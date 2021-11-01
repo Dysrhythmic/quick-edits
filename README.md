@@ -1,0 +1,1 @@
+An image processing project utilizing WebAssembly compiled from Rust.
