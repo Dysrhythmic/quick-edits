@@ -54,7 +54,7 @@ body {
         width: 100%;
     }
 
-    .content .options-container .options label {
+    .content .options-container .options .option {
         margin: 1.5rem;
     }
 }
