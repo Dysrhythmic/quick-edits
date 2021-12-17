@@ -2,11 +2,19 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
 
-module.exports = {
+const config = {
     entry: './public/main.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js'
+        path: path.resolve(__dirname, 'build'),
+        filename: 'bundle.js'
+    },
+    module : {
+        rules: [
+            {
+                use: ['style-loader', 'css-loader'],
+                test: /\.css$/
+            }
+        ]
     },
     plugins: [
         new HTMLWebpackPlugin({
@@ -20,3 +28,5 @@ module.exports = {
         asyncWebAssembly: true
     }
 };
+
+module.exports = config;

@@ -1,3 +1,5 @@
+import './style.css'
+
 const grayscale = document.getElementById('grayscale');
 const resize = document.getElementById('resize');
 const exactResize = document.getElementById('exact-resize');
