@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
 
 const config = {
-    entry: './public/main.js',
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js'
@@ -18,7 +18,7 @@ const config = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: './public/index.html'
+            template: './src/index.html'
         }),
         new WasmPackPlugin({
             crateDirectory: path.resolve(__dirname, '.')
