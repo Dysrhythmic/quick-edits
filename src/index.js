@@ -13,7 +13,7 @@ const input = document.getElementById('upload');
 const options = document.querySelector('.options');
 const fileReader = new FileReader();
 
-function optionController(){
+const optionController = () => {
     const dimensions = [document.getElementById('height-field'), document.getElementById('width-field')];
     if (resize.checked | exactResize.checked) {
         dimensions.forEach(field => {
@@ -51,7 +51,7 @@ function optionController(){
     }
 }
 
-function processImage(img, rustApp) {
+const processImage = (img, rustApp) => {
     const base64 = img.src.replace(/^data:image\/(png|jpeg);base64,/, '');
     let img_data_url = '';
     if (resize.checked) {
@@ -91,7 +91,7 @@ function processImage(img, rustApp) {
     document.getElementById('img').setAttribute('src', img_data_url);
 }
 
-async function init() {
+const init = async () => {
     let rustApp = null;
 
     try {
