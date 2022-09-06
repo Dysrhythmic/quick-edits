@@ -59,18 +59,18 @@ const optionController = () => {
         
         let x = xField.value;
         let y = yField.value;
-        let mousedown = false;
-        canvas.addEventListener('mousedown', e => {
+        let pointerdown = false;
+        canvas.addEventListener('pointerdown', e => {
             x = e.offsetX;
             y = e.offsetY;
-            mousedown = true;
+            pointerdown = true;
         });
 
         let height = document.getElementById('height');
         let width = document.getElementById('width');
         
-        canvas.addEventListener('mousemove', e => {
-            if (mousedown) {
+        canvas.addEventListener('pointermove', e => {
+            if (pointerdown) {
                 width = e.offsetX - x;
                 height = e.offsetY - y;
                 
@@ -83,8 +83,8 @@ const optionController = () => {
             }
         });
 
-        canvas.addEventListener("mouseup", () => {
-            mousedown = false;
+        canvas.addEventListener("pointerup", () => {
+            pointerdown = false;
             document.getElementById('height').value = height;
             document.getElementById('width').value = width;
             document.getElementById('x-amount').value = x;
