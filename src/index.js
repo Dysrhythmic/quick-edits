@@ -18,7 +18,7 @@ const crop = document.getElementById('crop');
 
 const optionController = () => {
     const dimensions = [document.getElementById('height-field'), document.getElementById('width-field')];
-    if (resize.checked | exactResize.checked | crop.checked) {
+    if (resize.checked | exactResize.checked) {
         dimensions.forEach(field => {
             if (field.classList.contains('hide')) {
                 field.classList.remove('hide');
@@ -43,14 +43,9 @@ const optionController = () => {
         amount.classList.add('hide')
     }
 
-    const xyFields = [document.getElementById('x-amount-field'), document.getElementById('y-amount-field')];
+    const xField = document.getElementById('x-amount-field');
+    const yField = document.getElementById('y-amount-field');
     if (crop.checked) {
-        xyFields.forEach(field => {
-            if (field.classList.contains('hide')) {
-                field.classList.remove('hide');
-            }
-        });
-
         const canvas = document.getElementById('canvas');
 
         img.classList.add('hide');
@@ -62,8 +57,8 @@ const optionController = () => {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
         
-        let x = xyFields[0].value;
-        let y = xyFields[1].value;
+        let x = xField.value;
+        let y = yField.value;
         let mousedown = false;
         canvas.addEventListener('mousedown', e => {
             x = e.offsetX;
@@ -97,19 +92,13 @@ const optionController = () => {
         });
     }
     else {
-        xyFields.forEach(field => {
-            if (!field.classList.contains('hide')) {
-                field.classList.add('hide');
-            }
+        if (img.classList.contains('hide')) {
+            img.classList.remove('hide');
+        }
 
-            if (img.classList.contains('hide')) {
-                img.classList.remove('hide');
-            }
-
-            if (!canvas.classList.contains('hide')) {
-                canvas.classList.add('hide');
-            }
-        });
+        if (!canvas.classList.contains('hide')) {
+            canvas.classList.add('hide');
+        }
     }
 
     const rotateSelection = document.getElementById('rotate-selection');
@@ -181,13 +170,6 @@ const cleanUp = () => {
         canvas.classList.add('hide');
 
         grayscale.checked = true;
-        const cropFields = [
-            document.getElementById('height-field'),
-            document.getElementById('width-field'),
-            document.getElementById('x-amount-field'),
-            document.getElementById('y-amount-field')
-        ];
-        cropFields.forEach(field => field.classList.add('hide'));
     }
 }
 
