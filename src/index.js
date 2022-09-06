@@ -16,22 +16,6 @@ const brightness = document.getElementById('brightness');
 const rotate = document.getElementById('rotate');
 const crop = document.getElementById('crop');
 
-const cleanUp = () => {
-    if (crop.checked) {
-        img.classList.remove('hide');
-        canvas.classList.add('hide');
-
-        grayscale.checked = true;
-        const cropFields = [
-            document.getElementById('height-field'),
-            document.getElementById('width-field'),
-            document.getElementById('x-amount-field'),
-            document.getElementById('y-amount-field')
-        ];
-        cropFields.forEach(field => field.classList.add('hide'));
-    }
-}
-
 const optionController = () => {
     const dimensions = [document.getElementById('height-field'), document.getElementById('width-field')];
     if (resize.checked | exactResize.checked | crop.checked) {
@@ -117,6 +101,14 @@ const optionController = () => {
             if (!field.classList.contains('hide')) {
                 field.classList.add('hide');
             }
+
+            if (img.classList.contains('hide')) {
+                img.classList.remove('hide');
+            }
+
+            if (!canvas.classList.contains('hide')) {
+                canvas.classList.add('hide');
+            }
         });
     }
 
@@ -181,6 +173,22 @@ const processImage = (img, rustApp) => {
     }
 
     document.getElementById('img').setAttribute('src', img_data_url);
+}
+
+const cleanUp = () => {
+    if (crop.checked) {
+        img.classList.remove('hide');
+        canvas.classList.add('hide');
+
+        grayscale.checked = true;
+        const cropFields = [
+            document.getElementById('height-field'),
+            document.getElementById('width-field'),
+            document.getElementById('x-amount-field'),
+            document.getElementById('y-amount-field')
+        ];
+        cropFields.forEach(field => field.classList.add('hide'));
+    }
 }
 
 const init = async () => {
