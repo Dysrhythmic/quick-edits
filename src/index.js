@@ -6,6 +6,7 @@ const uploadBtn = document.getElementById('upload-btn');
 const input = document.getElementById('upload');
 const options = document.querySelector('.options');
 const fileReader = new FileReader();
+const img = document.getElementById('img');
 
 const grayscale = document.getElementById('grayscale');
 const resize = document.getElementById('resize');
@@ -48,6 +49,51 @@ const optionController = () => {
             if (field.classList.contains('hide')) {
                 field.classList.remove('hide');
             }
+        });
+
+        const canvas = document.getElementById('canvas');
+
+        img.classList.add('hide');
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        canvas.classList.remove('hide');
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        
+        let x = xyFields[0].value;
+        let y = xyFields[1].value;
+        let mousedown = false;
+        canvas.addEventListener('mousedown', e => {
+            x = e.offsetX;
+            y = e.offsetY;
+            mousedown = true;
+        });
+
+        let height = document.getElementById('height');
+        let width = document.getElementById('width');
+        
+        canvas.addEventListener('mousemove', e => {
+            if (mousedown) {
+                width = e.offsetX - x;
+                height = e.offsetY - y;
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                ctx.beginPath();
+                ctx.strokeStyle = "red";
+                ctx.rect(x, y, width, height);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener("mouseup", () => {
+            mousedown = false;
+            document.getElementById('height').value = height;
+            document.getElementById('width').value = width;
+            document.getElementById('x-amount').value = x;
+            document.getElementById('y-amount').value = y;
         });
     }
     else {
@@ -144,7 +190,8 @@ const init = async () => {
         if (!uploadBtn.classList.contains('hide')) {
             uploadBtn.classList.add('hide');
         }
-        document.getElementById('img').setAttribute('src', fileReader.result)
+
+        img.setAttribute('src', fileReader.result);
     };
 
     input.addEventListener('change', () => {
@@ -154,8 +201,12 @@ const init = async () => {
     options.addEventListener('click', optionController);
 
     submit.addEventListener('click', () => {
-        const img = document.getElementById('img');
         processImage(img, rustApp);
+        
+        if (img.classList.contains('hide')) {
+            img.classList.remove('hide');
+            canvas.classList.add('hide');
+        }
     });
 }
 

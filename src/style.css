@@ -44,10 +44,12 @@ body {
     margin: 1.5rem;
 }
 
-.content > img {
+.content > img, #canvas {
     display: block;
     margin: 1.5rem auto;
 }
+
+#canvas { cursor: pointer; }
 
 @media(max-width: 800px) {
     .content .options-container {
