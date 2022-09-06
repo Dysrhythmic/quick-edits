@@ -46,6 +46,10 @@
             <input id="brightness" name="option" type="radio" />
             <span>Adjust Brightness</span>
           </label>
+          <label class="crop" for="crop">
+            <input id="crop" name="option" type="radio" />
+            <span>Crop</span>
+          </label>
           <label class="option" for="rotate">
             <input id="rotate" name="option" type="radio" />
             <span>Rotate</span>
@@ -55,13 +59,25 @@
             <input id="height" type="number" />
             <label for="height">height</label>
           </div>
+
           <div id="width-field" class="input-field hide option">
             <input id="width" type="number" />
             <label for="width">width</label>
           </div>
+
           <div id="amount-field" class="input-field hide option">
             <input id="amount" type="number" />
             <label for="amount">E.g. -50 or 50</label>
+          </div>
+
+          <div id="x-amount-field" class="input-field hide option">
+            <input id="x-amount" type="number" min="0" />
+            <label for="x-amount">top left x coordinate</label>
+          </div>
+
+          <div id="y-amount-field" class="input-field hide option">
+            <input id="y-amount" type="number" min="0" />
+            <label for="amount">top left y coordinate</label>
           </div>
 
           <div id="rotate-selection" class="hide">

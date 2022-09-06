@@ -123,3 +123,10 @@ pub fn rotate(encoded_img: &str, degrees_input: i32) -> String {
 
     pack_image(rotated_img)
 }
+
+#[wasm_bindgen]
+pub fn crop_img(encoded_img: &str, height: u32, width: u32, x: u32, y: u32) -> String {
+    let cropped_img = unpack_image(encoded_img).crop_imm(x, y, width, height);
+
+    pack_image(cropped_img)
+}

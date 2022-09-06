@@ -1,11 +1,5 @@
 import './style.css'
 
-const grayscale = document.getElementById('grayscale');
-const resize = document.getElementById('resize');
-const exactResize = document.getElementById('exact-resize');
-const contrast = document.getElementById('contrast');
-const brightness = document.getElementById('brightness');
-const rotate = document.getElementById('rotate');
 const submit = document.getElementById('submit');
 const submitBtn = document.getElementById('submit-btn');
 const uploadBtn = document.getElementById('upload-btn');
@@ -13,9 +7,17 @@ const input = document.getElementById('upload');
 const options = document.querySelector('.options');
 const fileReader = new FileReader();
 
+const grayscale = document.getElementById('grayscale');
+const resize = document.getElementById('resize');
+const exactResize = document.getElementById('exact-resize');
+const contrast = document.getElementById('contrast');
+const brightness = document.getElementById('brightness');
+const rotate = document.getElementById('rotate');
+const crop = document.getElementById('crop');
+
 const optionController = () => {
     const dimensions = [document.getElementById('height-field'), document.getElementById('width-field')];
-    if (resize.checked | exactResize.checked) {
+    if (resize.checked | exactResize.checked | crop.checked) {
         dimensions.forEach(field => {
             if (field.classList.contains('hide')) {
                 field.classList.remove('hide');
@@ -40,6 +42,22 @@ const optionController = () => {
         amount.classList.add('hide')
     }
 
+    const xyFields = [document.getElementById('x-amount-field'), document.getElementById('y-amount-field')];
+    if (crop.checked) {
+        xyFields.forEach(field => {
+            if (field.classList.contains('hide')) {
+                field.classList.remove('hide');
+            }
+        });
+    }
+    else {
+        xyFields.forEach(field => {
+            if (!field.classList.contains('hide')) {
+                field.classList.add('hide');
+            }
+        });
+    }
+
     const rotateSelection = document.getElementById('rotate-selection');
     if (rotate.checked) {
         if (rotateSelection.classList.contains('hide')) {
@@ -54,26 +72,36 @@ const optionController = () => {
 const processImage = (img, rustApp) => {
     const base64 = img.src.replace(/^data:image\/(png|jpeg);base64,/, '');
     let img_data_url = '';
-    if (resize.checked) {
+    
+    if (resize.checked | exactResize.checked | crop.checked) {
         const height = parseInt(document.getElementById('height').value);
         const width = parseInt(document.getElementById('width').value);
-        img_data_url = rustApp.resize_img(base64, height, width);
-    }
-    else if (exactResize.checked) {
-        const height = parseInt(document.getElementById('height').value);
-        const width = parseInt(document.getElementById('width').value);
-        img_data_url = rustApp.exact_resize_img(base64, height, width);
+
+        if (resize.checked) {
+            img_data_url = rustApp.resize_img(base64, height, width);
+        }
+        else if (exactResize.checked) {
+            img_data_url = rustApp.exact_resize_img(base64, height, width);
+        }
+        else if (crop.checked) {
+            const x = parseInt(document.getElementById('x-amount').value);
+            const y = parseInt(document.getElementById('y-amount').value);
+
+            img_data_url = rustApp.crop_img(base64, height, width, x, y);
+        }
     }
     else if (grayscale.checked) {
         img_data_url = rustApp.grayscale_img(base64);
     }
-    else if (contrast.checked) {
+    else if (contrast.checked | brightness.checked) {
         const amount = parseFloat(document.getElementById('amount').value)
-        img_data_url = rustApp.adjust_img_contrast(base64, amount)
-    }
-    else if (brightness.checked) {
-        const amount = parseInt(document.getElementById('amount').value)
-        img_data_url = rustApp.adjust_img_brightness(base64, amount)
+
+        if (contrast.checked) {
+            img_data_url = rustApp.adjust_img_contrast(base64, amount);
+        }
+        else if (brightness.checked) {
+            img_data_url = rustApp.adjust_img_brightness(base64, amount)
+        }
     }
     else if (rotate.checked) {
         let degrees = 0;
@@ -86,8 +114,10 @@ const processImage = (img, rustApp) => {
         else if (document.getElementById('two-seventy').checked) {
             degrees = 270;
         }
+
         img_data_url = rustApp.rotate(base64, degrees);
     }
+
     document.getElementById('img').setAttribute('src', img_data_url);
 }
 
