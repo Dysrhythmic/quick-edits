@@ -1,7 +1,7 @@
 [package]
-name = "image-effects"
-version = "0.1.0"
-edition = "2021"
+name = "quick-edits"
+version = "0.2.3"
+edition = "2022"
 
 [lib]
 crate-type = ["cdylib"]
